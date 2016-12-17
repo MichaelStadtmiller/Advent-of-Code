@@ -1,41 +1,40 @@
-import csv
-from fns import filetolist
-def move(c,d,v,h):
-        if c[2] == 'N':
-                if d == 'R':
-					c[1]=c[1]+v
-					c[2]='E'
-                if d == 'L':
-					c[1]=c[1]-v
-					c[2]='W'
-        elif c[2] == 'E':
-                if d == 'R':
-					c[0]=c[0]-v
-					c[2]='S'
-                if d == 'L':
-					c[0]=c[0]+v
-					c[2]='N'
-        elif c[2] == 'S':
-                if d == 'R':
-					c[1]=c[1]-v
-					c[2]='W'
-                if d == 'L':
-					c[1]=c[1]+v
-					c[2]='E'
-        elif c[2] == 'W':
-                if d == 'R':
-					c[0]=c[0]+v
-					c[2]='N'
-                if d == 'L':
-					c[0]=c[0]-v
-					c[2]='S'
+from fns import filelinestolist
+def left(pos):
+    if pos in (1,4,7):
+        return int(pos)
+    else:
+        return pos-1
 
-coord = [0,0,'N']
-history = []
-myl = filetolist('input_day1.txt')
-for i in myl:
-        move(coord,str(i.strip()[:1]),int(i.strip()[1:]),history)
- #       print coord
+def right(pos):
+    if pos in (3,6,9):
+        return int(pos)
+    else:
+        return pos+1
 
-print coord
-print coord[0]+coord[1]
+def up(pos):
+    if pos in (1,2,3):
+        return int(pos)
+    else:
+        return pos-3
+
+def down(pos):
+    if pos in (7,8,9):
+        return int(pos)
+    else:
+        return pos+3
+
+mylist = filelinestolist('input_day2.txt')
+a = []
+pos = 5
+for l in mylist:
+    for x in l:
+        if x=='L':
+            pos = left(pos)
+        elif x=='R':
+            pos = right(pos)
+        elif x=='U':
+            pos = up(pos)
+        elif x=='D':
+            pos = down(pos)
+    a.append(pos)
+print(a)
