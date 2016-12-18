@@ -23,7 +23,7 @@ def down(pos):
     else:
         return pos+3
 
-mylist = filelinestolist('input_day2.txt')
+mylist = filelinestolist('i.txt')
 a = []
 pos = 5
 for l in mylist:
